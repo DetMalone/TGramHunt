@@ -1,0 +1,67 @@
+﻿@page
+@model TGramHunt.Pages.Profile.IndexModel
+@using TGramHunt.Contract.Enums
+@using TGramHunt.Helpers
+@using TGramHunt.Services.Helpers
+@{
+    ViewData["Title"] = "Profile page";
+    var filter = (ProfileFilter?)ViewData[nameof(ProfileFilter)];
+    var productSorting = (ProductListSorting?)ViewData[nameof(ProductListSorting)];
+    var customUrlHelper = new CustomUrlHelper(@Url);
+    var userAvatarLink = LinkHelper.ImageRelativLink(
+            Model?.Profile?.PictureIdx100, 
+            Model?.Profile?.PictureCache ?? 0,
+            Model?.Profile?.Picture);
+}
+
+<div class="h-100 w-100 profile-container border-top" id="profile">
+    <div class="d-flex flex-row">
+        <div class="profile_avatar text-center">
+            @if (!string.IsNullOrWhiteSpace(userAvatarLink))
+            {
+                <img src="@userAvatarLink" class="rounded-circle article-img" />
+            }
+            else
+            {
+                <i class="fas fa-camera color-grey"></i>
+            }
+        </div>
+        <div class="flex-column h-100 text-break profile-info">
+            <div class="profile-name">@Model.Profile.Name</div>
+            <div class="color-grey profile-email">@@@Model.Profile.TelegramUserName</div>
+            <a id="edit-profile-link" href='/editprofile' class="color-grey edit-profile-link">
+                Edit Profile
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="d-flex flex-row container-fluid link-main-block" id="profile-container-buttons">
+    <a href="@customUrlHelper.GenerateUrlParameters(ProfileFilter.myProducts, productSorting)"
+       class="link @(filter == ProfileFilter.myProducts ? "link-item-selected" : "" )">
+        My Product (@Model.Profile.MyProductCount)
+    </a>
+    <a href="@customUrlHelper.GenerateUrlParameters(ProfileFilter.upvotes, productSorting)"
+       class="link @(filter == ProfileFilter.upvotes ? "link-item-selected" : "" )">
+        Upvotes (@Model.Profile.UpvotesCount)
+    </a>
+    <div class="link-main-block-inner">
+    @Html.DropDownList("ProductListSortingSelect", null, 
+    new {
+        @class="form-select select-filter link select-arrow-icon",
+        @onchange="location = this.value;"
+    })
+    </div>
+</div>
+
+<div class="container-fluid" id="profile-container-buttons">
+    <div class="d-flex">
+        @Html.AntiForgeryToken()
+        <div class="col" hx-indicator="#loading-indicator">
+            <partial name="_ProductListContainer" model="@Model.Products" />
+            <center>
+                <img id="loading-indicator" class="htmx-indicator" width="60" src="/images/bars.svg">
+            </center>
+        </div>
+    </div>
+</div>

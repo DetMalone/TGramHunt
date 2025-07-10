@@ -1,0 +1,189 @@
+﻿.product-item-container {
+    position: relative;
+    --vote-width: 115px;
+    --vote-right: 10px;
+    --height-vote-button: 114px;
+
+    .product-item-container-inner {
+        position: relative;
+        padding: 0px;
+
+        .product-item-info {
+            padding-right: calc(var(--bs-gutter-x) * 0.5);
+            padding-left: calc(var(--bs-gutter-x) * 0.5);
+            padding: calc(var(--bs-gutter-x) * 0.5) calc(var(--bs-gutter-x));
+            padding-right: var(--vote-width);
+            min-height: 138px;
+        }
+
+        &:hover {
+            .product-item-info {
+                background-color: #039be53d;
+                border-radius: 10px;
+            }
+        }
+    }
+
+    .product-item-vote {
+        position: absolute;
+        right: var(--vote-right);
+        max-width: calc(var(--vote-width) - var(--vote-right));
+        top: calc(var(--bs-gutter-x) * 0.5);
+    }
+
+    .btn-voting-default {
+        width: 95px;
+        height: var(--height-vote-button);
+        background: #FFFFFF;
+        border: 1px solid rgba(153, 153, 153, 0.3);
+        border-radius: 14px;
+    }
+
+    .btn-voting-hover {
+        &:hover {
+            transition: all 0.2s linear;
+            border: 2px solid rgba(3, 155, 229, 0.5);
+        }
+    }
+
+    .btn-voting-closed {
+        width: 95px;
+        height: var(--height-vote-button);
+        background: rgba(168, 168, 168, 0.3);
+        border: 1px solid rgba(153, 153, 153, 0.3);
+        border-radius: 14px;
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+
+    .btn-voting__selected {
+        width: 95px;
+        height: var(--height-vote-button);
+        border: 1px solid rgba(3, 155, 229, 1);
+
+        .vote-count, .fa-chevron-up {
+            color: rgba(3, 155, 229, 1);
+        }
+    }
+}
+
+@media (max-width: 442px){
+    .product-item-container .btn-voting-closed  {
+        width: 60px;
+        height: 80px;
+    }
+}
+
+@media (max-width: 300px){
+    .product-item-container .btn-voting-closed  {
+        width: 55px;
+        height: 75px;
+    }
+}
+
+@media (max-width: 991px) {
+}
+
+@media (max-width: 767px) {
+}
+
+@media (max-width: 480px) {
+    .product-item-container {
+        --vote-width: 75px;
+        --vote-right: 5px;
+
+        .product-item-container-inner {
+            .product-item-info {
+                min-height: unset;
+            }
+        }
+
+        .product-item-vote {
+            position: absolute;
+            padding-left: 10px;
+            top: calc(var(--bs-gutter-x) * 0.5);
+            height: calc(100% - 2*calc(var(--bs-gutter-x) * 0.5));
+            bottom: calc(var(--bs-gutter-x) * 0.5);
+
+            > div {
+                height: 100%;
+
+                > button {
+                    height: 100%;
+                }
+            }
+        }
+
+        .product-item-container-inner:hover {
+            .btn-voting-default {
+                border-radius: 10px;
+            }
+
+            .btn-voting-hover {
+                &:hover {
+                    border-radius: 10px;
+                    border-color: transparent;
+                    border: 1px solid #039BE5;
+                }
+            }
+
+            .btn-voting__selected {
+                border: 1px solid #039BE5;
+            }
+        }
+
+        .btn-voting-default {
+            max-width: 60px;
+            border-color: transparent;
+            border-radius: 0px;
+            border-left: 1px solid rgba(153, 153, 153, 0.3);
+            padding: 0px;
+        }
+
+        .btn-voting-hover {
+            &:hover {
+                border-radius: 0px;
+                border-color: transparent;
+                border-left: 1px solid #039BE5;
+            }
+
+            &:visited {
+                &:hover {
+                    .vote-count {
+                        color: #000;
+                    }
+                }
+            }
+
+            &:focus {
+                outline: 0 !important;
+                box-shadow: none !important;
+            }
+
+            &:active {
+                outline: 0 !important;
+                box-shadow: none !important;
+            }
+        }
+
+        .btn-voting__selected {
+            color: #039BE5;
+            border-color: transparent;
+            border-left: 1px solid #039BE5;
+
+            .vote-count, .fa-chevron-up {
+                color: rgba(3, 155, 229, 1);
+            }
+
+            &:focus {
+                outline: 0 !important;
+                box-shadow: none !important;
+            }
+
+            &:active {
+                outline: 0 !important;
+                box-shadow: none !important;
+            }
+        }
+    }
+}

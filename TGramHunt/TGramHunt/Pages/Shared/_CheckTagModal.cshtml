@@ -1,0 +1,36 @@
+﻿@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+@{
+    var token = Xsrf.GetAndStoreTokens(Context).RequestToken;
+}
+
+<div class="modal fade" id="check-tag-modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body" style="padding-bottom: 40px;">
+                <div class="row">
+                    <h3 class="heading mb-3">Check telegram tag</h3>
+
+                    <form id="check-tag-form">
+                        <input type="text" class="form-control border-radius form-field mb-3" id="producttag" name="producttag" placeholder="Enter telegram tag"
+                               required autocomplete="off" pattern="^@@[a-zA-Z]([a-zA-Z0-9][_]?)+[a-zA-Z0-9]$" data-rule-maxlength="33" data-rule-minlength="6" value="@@">
+
+                        <label id="producttag-error" class="error" for="producttag" style="display:none"></label>
+                        <button type="submit" class="btn btn-post-product elem-height">Check tag</button>
+                        <div class="form-group">
+                            <input type="checkbox" class="form-check-input" value="Test" id="verifyTagChkbox" checked="" style="width: 20px; height: 20px">
+                            <label class="form-check-label" for="verifyTagChkbox">Enable tag verification</label>   
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    // https://trello.com/c/RyO6daiS
+    localStorage.setItem("CSRFToken","@token");
+</script>

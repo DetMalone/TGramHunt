@@ -1,0 +1,45 @@
+﻿@model TGramHunt.AdminPanel.Views.Login.LoginViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>@ViewData["Title"] - TGramHunt.AdminPanel</title>
+        <style>#wrapper {width: 520px;} #wrapper .container {max-width: 100%; display: block;}</style>
+        <style>html, body { height: 80%; }</style>
+        <link rel="stylesheet" href="~/dist/style.css" asp-append-version="true" />
+    </head>
+    <body>
+        <div class="h-100 d-flex align-items-center justify-content-center">
+            <div id="wrapper">
+                <div class="container">
+                    <main role="main" class="pb-3">
+                        <h1 class="bg-info text-white">Sign in to your account</h1>
+                        
+                        @if (ViewBag.Message != null)
+                        {
+                            <div class="p-1 mb-2 bg-success text-white">@ViewBag.Message</div>
+                        }
+                        <form method="post" asp-controller="Account" asp-action="Login">
+                            <div asp-validation-summary="ModelOnly"></div>
+                            <div class="form-group">
+                                <label asp-for="Email"></label>
+                                <input asp-for="Email" class="form-control"/>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Password"></label>
+                                <input asp-for="Password" class="form-control" type= "password"/>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Sign in</button>
+                        </form>
+                    </main>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

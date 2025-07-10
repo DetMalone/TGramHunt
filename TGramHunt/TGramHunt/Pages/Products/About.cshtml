@@ -1,0 +1,83 @@
+﻿@page
+@using TGramHunt.Contract.Enums
+@using TGramHunt.Pages.Shared.Components.VoteButton
+@using TGramHunt.Services.Helpers
+@using TGramHunt.ViewModels.MainPage
+@model TGramHunt.Pages.Products.AboutModel
+@{
+    Layout = null;
+    var product = Model.Product;
+    var prodOwner = Model.ProductOwner;
+
+    var imageLink = LinkHelper
+        .ImageRelativLink(product.ImageIdx104, product.ImageCache);
+    var userAvatarLink = LinkHelper
+        .ImageRelativLink(prodOwner?.PictureIdx41,
+            prodOwner?.PictureCache ?? 0,
+            prodOwner?.Picture
+        );
+    var isVoteDisabled = product.DateOfCreation.Date != DateTime.UtcNow.Date;
+}
+
+<div class="about-container">
+    <div class="row">
+        <div class="col icon-product">
+            @if (!string.IsNullOrWhiteSpace(imageLink))
+            {
+                <img src="@imageLink" />
+            }
+        </div>
+
+        <div class="col product-text-about">
+            <div class="col product-user-profile">
+                <span class="fw-bold text-break product-name">@product.Name</span>
+                <a target="_blank" rel="noopener noreferrer" href="@Model.TagHref" class="link-secondary text-underline-hover text-break">@product.Tag</a>
+                @if (product.CurrentStatus == ProductStatus.OnModeration)
+                {
+                    <span class="text-break product-status status-awaiting">Awaiting moderation</span>
+                }
+                else if (product.CurrentStatus == ProductStatus.Rejected)
+                {
+                    <span class="text-break product-status status-rejected">Rejected</span>
+                }
+            </div>
+            <div class="col category-color">@Html.DisplayTextFor(m => m.Product.Category)</div>
+            <div class="col product-description text-break">@product.Description</div>
+        </div>
+    </div>
+    <div class="row second-section-about-product">
+        <div class="col right-container">
+            @await Component.InvokeAsync("AboutVoteButton", 
+            new ProductVoteViewModel { 
+                ProductId = product.Tag, 
+                VoteCount = product.Votes, 
+                IsVoteDisabled = isVoteDisabled,
+                IsUserVoted = product.IsUserVoted
+            })
+
+            <button type="button" link="@Model.TagHref" class="open-at-telegram button-element">Open at Telegram</button>
+
+            <div class="creators-headers hunter-header">Hunter</div>
+            <div class="row hunter-container">
+                <div class="hunter-avatar col">
+                    @if (!string.IsNullOrWhiteSpace(userAvatarLink))
+                    {
+                        <img src="@userAvatarLink" />
+                    }
+                </div>
+                <div class="hunter-info col">
+                    <div class="hunter-name">@prodOwner?.Name</div>
+                    <div class="hunter-email">@prodOwner?.Email</div>
+                </div>
+            </div>
+            <div class="creators-headers makers-header">Makers</div>
+            @if (Model.Product.Makers != null && Model.Product.Makers.Any())
+            {
+                foreach (var maker in Model.Product.Makers)
+                {
+                    <div class="the-maker">@maker</div>
+                }
+            }
+        </div>
+    </div>
+</div>

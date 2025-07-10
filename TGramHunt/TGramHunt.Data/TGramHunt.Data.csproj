@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ProduceReferenceAssembly>False</ProduceReferenceAssembly>
+		<DisableTransitiveProjectReferences>true</DisableTransitiveProjectReferences>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="MongoDB.Driver.GridFS" Version="2.18.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\TGramHunt.Contract\TGramHunt.Contract.csproj" />
+	</ItemGroup>
+</Project>

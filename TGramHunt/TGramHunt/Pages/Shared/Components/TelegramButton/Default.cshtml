@@ -1,0 +1,25 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using TGramHunt.Contract
+@using System.Web
+@using TGramHunt.Services.Helpers
+
+<div class="telegram-auth-button-container">
+    <iframe id="container-frame-@ViewBag.ContainerGuid" style="visibility: hidden;"></iframe>
+</div>
+
+<script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function() {
+        var justDiv = document.createElement("div"),
+            idIframe = "container-frame-@ViewBag.ContainerGuid",
+            url = window.location.origin + "@LinkHelper.emptyLink",
+            styleUrl = window.location.origin + "@LinkHelper.tgIframeCssPath";
+
+        justDiv.innerHTML = '@Html.Raw(HttpUtility.HtmlDecode(@ViewBag.WidgetEmbedCode.Replace("/script", "\\/script")))';
+
+        window.setScriptToIframe(
+            idIframe, 
+            justDiv.firstChild, 
+            url,
+            styleUrl);
+    });
+</script>

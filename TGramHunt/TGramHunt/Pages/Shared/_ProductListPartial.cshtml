@@ -1,0 +1,78 @@
+﻿@using TGramHunt.Contract.ViewModels.MainPage
+@using System.Globalization
+@using TGramHunt.Contract.Enums
+@using TGramHunt.Helpers
+@using ViewModels.MainPage
+@model IEnumerable<ProductsForPeriodViewModel>
+@{
+    var customUrlHelper = new CustomUrlHelper(@Url);
+}
+
+@if (Model.Any())
+{
+    foreach (var groupProductByDate in Model)
+    {
+        if (groupProductByDate.IsShowDate)
+        {
+            <div class="col mt-4 mb-4">
+                @if (groupProductByDate.Date == DateTime.UtcNow.Date)
+                {
+                    <h3 class="w-100">Today</h3>
+                }
+                else if (groupProductByDate.Date == DateTime.UtcNow.Date.AddDays(-1))
+                {
+                    <h3 class="w-100">Yesterday</h3>
+                }
+                else
+                {
+                    <h3 class="w-100">@groupProductByDate.Date.ToString("dd MMMM yyyy", new CultureInfo("en-US"))</h3>
+                }
+            </div>
+        }
+
+        if (groupProductByDate.Products != null && groupProductByDate.Products.Any())
+        {
+            foreach (var product in groupProductByDate.Products)
+            {
+                var isVoteAvailable = @*groupProductByDate.IsShowVoteAndDisableThem || *@groupProductByDate.Date == DateTime.UtcNow.Date;
+
+                <div class="row mt-4 mb-2 me-0 ms-0 pb-4 border-bottom border-1 product-item-container">
+                    <div class="product-item-container-inner">
+                        <div class="col cursor-pointer product-item-info product-click" tag-id="@product.Tag">
+                            <partial name="_ProductBlockPartial" model="@product" />
+                        </div>
+                        <div class="col-auto align-self-center pe-0 product-item-vote">
+                            @await Component.InvokeAsync("VoteButton",
+            new ProductVoteViewModel {
+            ProductId = product.Tag,
+            VoteCount = product.Votes,
+            IsVoteDisabled = !isVoteAvailable,
+            IsUserVoted = product.IsUserVoted })
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    }
+
+    if (Model.Last().Products != null && Model.Last().Products.Any())
+    {
+        var filterUrl = 
+        customUrlHelper.GenerateUrlParameters(
+            "LoadProducts",
+Model.Last().Products.Min(x => x.DateOfCreation).ToString("O"),
+ViewData[nameof(ProductCategory)]?.ToString(),
+ViewData[nameof(ProfileFilter)]?.ToString(),
+ViewData[nameof(ProductListSorting)]?.ToString());
+
+        <div hx-get="@filterUrl"
+     hx-params="*"
+     hx-trigger="revealed"
+     hx-swap="afterend">
+        </div>
+    }
+}
+else
+{
+    <p class="text-center fs-5 mt-4 fw-bold">No more products</p>
+}

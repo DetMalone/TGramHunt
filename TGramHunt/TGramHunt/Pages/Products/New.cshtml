@@ -1,0 +1,135 @@
+﻿@page
+@using System.Reflection
+@using System.ComponentModel.DataAnnotations;
+@using TGramHunt.Contract.Enums
+@model TGramHunt.Pages.Products.NewModel
+
+<div class="container-lg" id="create-prod-container">
+    <form class="col-12 col-lg-10 offset-lg-1 col-xl-8 offset-xl-2" id="create-prod-form">
+        <h2>Create your Telegram product</h2>
+        <p class="text-start">Tell us about your project on Telegram</p>
+        @Html.AntiForgeryToken()
+
+        <div class="row g-3">
+            <div class="col-12 mb-1">
+                <div class="col-12 col-sm-6">
+                    <label class="form-label fw-bold">Category *</label>
+                    <select name="category" class="border-radius form-field elem-height form-select">
+                        @{foreach (var e in Enum.GetValues<ProductCategory>())
+                            {
+                                var c = (ProductCategory)ViewData["category"];
+
+                                if(c == e)
+                                {
+                                    <option value="@((int)e)" selected> 
+                                        @(e.GetType().GetMember(e.ToString()).First()
+                                       .GetCustomAttribute<DisplayAttribute>().GetName())
+                                    </option>
+                                }
+                                else
+                                {
+                                    <option value="@((int)e)">
+                                @(e.GetType().GetMember(e.ToString()).First()
+                            .GetCustomAttribute<DisplayAttribute>().GetName())
+                            </option>
+                                }    
+                            }}
+                    </select>
+                </div>
+
+                <label for="category" generated="true" class="error" style="display:none"></label>
+            </div>
+
+            <div class="col-12 col-sm-6 mb-2">
+                <label for="name" class="form-label fw-bold">Name *</label>
+                <input type="text" class="form-control border-radius elem-height form-field" id="name" name="name" placeholder="Enter name" 
+                       value="@ViewData["name"]" required autocomplete="off" data-rule-maxlength="255">
+
+                <label for="name" generated="true" class="error" style="display:none"></label>
+            </div>
+            <div class="col-12 col-sm-6 mb-2">
+                <label for="tag" class="form-label fw-bold">Telegram tag *</label>
+                <input type="text" class="form-control border-radius elem-height form-field" id="tag" name="tag" value="@ViewData["tag"]"
+                       readonly required pattern="^@@[a-zA-Z]([a-zA-Z0-9][_]?)+[a-zA-Z0-9]$" autocomplete="off" data-rule-maxlength="33" data-rule-minlength="6">
+
+                <label for="tag" generated="true" class="error" style="display:none"></label>
+            </div>
+
+            <div class="col-12 mb-2">
+                <label for="description" class="form-label fw-bold">Description *</label>
+                <textarea class="form-control border-radius form-field" id="description" name="description" placeholder="Tell us briefly about the project..." rows="3"
+                          required="" autocomplete="off" data-rule-maxlength="2000">@ViewData["description"]</textarea>
+
+                <label for="description" generated="true" class="error" style="display:none"></label>
+            </div>
+
+            <div class="col-12 col-sm-8 mb-2">
+                <label class="form-label fw-bold">Cover *</label>
+                <p class="text-start">Upload a JPG or PNG picture no larger than 10MB that will represent your project. The picture will be converted to 1×1 proportions. </p>
+
+                <div class="row col-md-10 col-lg-12 mb-2">
+                    <div class="col-5" id="create-prod-preview">
+                        <img src="~/content/images/photo.png" class="float-start cover-preview">
+                    </div>
+
+                    <div class="col-7 d-flex align-items-center">
+                        <label class="btn btn-file-upload elem-height">
+                            <input id="cover" name="cover" type="file" onchange="previewFile()" required>
+                            Upload a new picture
+                        </label>
+                    </div>
+                </div>
+
+                <label for="cover" generated="true" class="error" style="display:none"></label>
+            </div>
+
+            <div class="col-12">
+                <label class="form-label fw-bold">Makers</label>
+                <p class="text-start">Who helped you work on this project? Maximum 6.</p>
+
+                <div class="row mb-3">
+                    <div class="col-12 col-sm-8">
+                        <div class="input-group">
+                            <input type="text" class="form-control makers-control-left elem-height form-field" pattern="^[a-zA-Z][a-zA-Z’ -]+$"
+                                   placeholder="Enter Name" id="maker" name="maker" autocomplete="off" data-rule-maxlength="100">
+                            <button class="btn btn-outline-secondary makers-control-right elem-height" type="button" onclick="addMaker()" id="add-maker-btn">Add+</button>
+                        </div>
+
+                        <label for="maker" generated="true" class="error" style="display:none"></label>
+                    </div>
+                </div>
+
+                <div class="row" id="makers-list">
+                </div>
+
+                <input type="text" class="form-control" id="mak" style="display:none" name="makers">
+                <label for="makers" generated="true" class="error" style="display:none"></label>
+            </div>
+
+            <hr class="secondary" />
+
+            <div class="mt-0">
+                <button type="submit" class="col-5 btn btn-publish border-radius elem-height">Publish</button>
+                <button type="button" class="col-5 btn btn-cancel border-radius elem-height" onclick="document.location.href = '/'">Cancel</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        activateNewProductPage();
+    });
+</script>
+<template id="maker-template">
+    <div class="col-12 col-sm-4 mb-2 maker">
+        <div class="row position-relative">
+            <div class="col-3 col-sm-4 maker-photo"> <img src="/content/images/photo.png" class="rounded-circle" width="50" /></div>
+            <div class="col-7 sm-8 align-middle maker-text">
+                <span class="mb-1 maker-name">${maker.val()}</span>
+            </div>
+            <div class="col-2 delete-btn"><a><i class="far fa-trash-alt fa-lg"></i></a></div>
+            <span class="del-hover">Delete</span>
+        </div>
+    </div>
+</template>

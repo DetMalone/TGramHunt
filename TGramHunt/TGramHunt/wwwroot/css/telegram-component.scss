@@ -1,0 +1,43 @@
+﻿.header-menu-tg {
+    .telegram-auth-button-container {
+        height: 40px;
+        width: 250px;
+        position: relative;
+
+        > iframe {
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+        }
+    }
+}
+
+.header-menu-tg.mobile-menu {
+    .telegram-auth-button-container {
+        height: 40px;
+        width: unset;
+        position: relative;
+
+        > iframe {
+            margin-left: 0px;
+            margin-right: 0px;
+            display: block;
+        }
+    }
+}
+
+.dialog-tg {
+    .telegram-auth-button-container {
+        height: 80px;
+
+        iframe {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+}
+
+.nav-link-tg {
+    padding: 0px;
+}

@@ -1,0 +1,30 @@
+﻿@page "/{filterProducts?}"
+@model TGramHunt.Pages.IndexModel
+@using Microsoft.AspNetCore.Identity
+@using TGramHunt.Contract
+@using TGramHunt.Contract.Enums
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+@{
+    ViewData["Title"] = "Main page";
+    var filter = (string)ViewData[nameof(ProductCategory)];
+}
+
+<div class="d-flex flex-row container-fluid link-main-block">
+    <a href="?category=all" class="link @(filter == "all" ? "link-item-selected" : "")">All</a>
+    <a href="?category=@(ProductCategory.Channel.ToString())" class="link @(filter == ProductCategory.Channel.ToString() ? "link-item-selected" : "")">Channel</a>
+    <a href="?category=@(ProductCategory.Group.ToString())" class="link @(filter == ProductCategory.Group.ToString() ? "link-item-selected" : "")">Group</a>
+    <a href="?category=@(ProductCategory.StickerPack.ToString())" class="link @(filter == ProductCategory.StickerPack.ToString() ? "link-item-selected" : "")">Sticker-pack</a>
+    <a href="?category=@(ProductCategory.Game.ToString())" class="link @(filter == ProductCategory.Game.ToString() ? "link-item-selected" : "")">Game</a>
+    <a href="?category=@(ProductCategory.Bot.ToString())" class="link @(filter == ProductCategory.Bot.ToString() ? "link-item-selected" : "")">Bot</a>
+</div>
+
+<div class="d-flex">
+    @Html.AntiForgeryToken()
+    <div class="col main-product-block" hx-indicator="#loading-indicator">
+        <partial name="_ProductListContainer" model="@Model.Products" />
+        <center>
+            <img id="loading-indicator" class="htmx-indicator" width="60" src="/images/bars.svg">
+        </center>
+    </div>
+</div>

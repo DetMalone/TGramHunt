@@ -1,0 +1,37 @@
+﻿@using TGramHunt.Helpers
+@using TGramHunt.Services.Helpers
+@using TGramHunt.Services.Services.IServices;
+@inject IUserService UserService
+
+@{
+    var isSignedIn = (await UserService.GetIfAuthorized(User)) != null;
+    var urlHelper = new CustomUrlHelper(Url);
+}
+
+<div id="mobile-menu" class="sidenav">
+
+    <div class="d-flex justify-content-between header">
+        <a class="navbar-brand" href="/">TgramHunt</a>
+
+        <button type="button" class="btn-close" onclick="closeMobileMenu()"></button>
+    </div>
+
+    <a class="mobile-menu nav-link" href="/privacy">Privacy Policy</a>
+
+    @if (isSignedIn)
+    {
+        <form method="post" action="@LinkHelper.authLogout" class="mobile-menu nav-link">
+            <button type="submit" class="nav-link btn btn-link" id="mobile-logout-btn">Logout</button>
+        </form>
+
+        <a href="@urlHelper.ProfileIndex()" class="mobile-menu nav-link">Profile</a>
+
+        <button type="button" class="mobile-menu btn elem-height check-tag-btn-click">Post a product</button>
+    }
+    else
+    {
+        <a class="mobile-menu nav-link cursor-pointer" data-bs-toggle="modal" data-bs-target="#modal-login">Login</a>
+        <button type="button" class="mobile-menu btn elem-height" data-bs-toggle="modal" data-bs-target="#modal-login">Post a product</button>
+    }
+
+</div>

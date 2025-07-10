@@ -1,0 +1,63 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<CopyRefAssembliesToPublishDirectory>false</CopyRefAssembliesToPublishDirectory>
+		<UserSecretsId>96d8f629-a20a-497b-bdce-a60b30eab1c5</UserSecretsId>
+		<DisableTransitiveProjectReferences>true</DisableTransitiveProjectReferences>
+	    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <Content Remove="wwwroot\js\about.ts" />
+	  <Content Remove="wwwroot\js\checktagmodal.ts" />
+	  <Content Remove="wwwroot\js\edit_profile.ts" />
+	  <Content Remove="wwwroot\js\helpers\edit-profile-helper.ts" />
+	  <Content Remove="wwwroot\js\helpers\link-helper.ts" />
+	  <Content Remove="wwwroot\js\helpers\request-helper.ts" />
+	  <Content Remove="wwwroot\js\main.ts" />
+	  <Content Remove="wwwroot\js\new_product.ts" />
+	  <Content Remove="wwwroot\js\products_new.ts" />
+	  <Content Remove="wwwroot\js\site.ts" />
+	  <Content Remove="wwwroot\js\telegram_auth_component.ts" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Include="wwwroot\dist\47074dec01b64a5db2c4.woff2" />
+	  <None Include="wwwroot\dist\64d495f582d4a1590a6c.woff2" />
+	  <None Include="wwwroot\dist\scripts.bundle.js" />
+	  <None Include="wwwroot\dist\scripts.bundle.js.map" />
+	  <None Include="wwwroot\dist\style.css.map" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="AutoMapper" Version="10.1.1" />
+		<PackageReference Include="FluentValidation.AspNetCore" Version="11.0.1" />
+		<PackageReference Include="HtmlSanitizer" Version="6.0.441" />
+		<PackageReference Include="Telegram.Bot.Extensions.LoginWidget" Version="1.2.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\TGramHunt.Contract\TGramHunt.Contract.csproj" />
+		<ProjectReference Include="..\TGramHunt.Services\TGramHunt.Services.csproj">
+		  <PrivateAssets></PrivateAssets>
+		</ProjectReference>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <TypeScriptCompile Include="wwwroot\js\about.ts" />
+	  <TypeScriptCompile Include="wwwroot\js\checktagmodal.ts" />
+	  <TypeScriptCompile Include="wwwroot\js\edit_profile.ts" />
+	  <TypeScriptCompile Include="wwwroot\js\helpers\edit-profile-helper.ts">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </TypeScriptCompile>
+	  <TypeScriptCompile Include="wwwroot\js\helpers\link-helper.ts" />
+	  <TypeScriptCompile Include="wwwroot\js\helpers\request-helper.ts" />
+	  <TypeScriptCompile Include="wwwroot\js\main.ts" />
+	  <TypeScriptCompile Include="wwwroot\js\new_product.ts" />
+	  <TypeScriptCompile Include="wwwroot\js\products_new.ts" />
+	  <TypeScriptCompile Include="wwwroot\js\site.ts" />
+	  <TypeScriptCompile Include="wwwroot\js\telegram_auth_component.ts" />
+	</ItemGroup>
+
+</Project>

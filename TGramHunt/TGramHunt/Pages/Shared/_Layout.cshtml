@@ -1,0 +1,110 @@
+﻿@using TGramHunt.Contract.Enums
+@using TGramHunt.Helpers
+@using TGramHunt.Models
+@using TGramHunt.Services.Helpers
+@using TGramHunt.Services.Services.IServices;
+@inject IUserService UserService
+@{
+    var isMain = ViewData[nameof(ProductCategory)] != null;
+    var urlHelper = new CustomUrlHelper(Url);
+    var currentStatus = (Model as BasePageModel)?.Status;
+
+    if (currentStatus == 404)
+    {
+        IgnoreBody();
+    }
+
+    var isSignedIn = (await UserService.GetIfAuthorized(User)) != null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - TGramHunt</title>
+    <link rel="stylesheet" href="~/dist/style.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg @(isMain? "header-main-block" : "") @(isSignedIn ? "auth-nav-block" : "not-auth-nav-block")">
+            <a class="header-logo" href="/">TgramHunt</a>
+            <button class="hamburger" type="button">
+                <i class="fas fa-bars @(isMain?"hamburger-icon-main":"hamburger-icon") "></i>
+            </button>
+            <ul class="navbar-nav me-auto mb-lg-0 hide-on-mobile"></ul>
+
+            <a class="nav-item-margin hide-on-mobile" href="/privacy">Privacy Policy</a>
+            @if (isSignedIn)
+            {
+                <a class="nav-item-margin hide-on-mobile" href="@urlHelper.ProfileIndex()">Profile</a>
+                <form class="nav-item-margin hide-on-mobile" method="post" action="@LinkHelper.authLogout">
+                    <button class="logut-btn" type="submit">Logout</button>
+                </form>
+                <button type="button" class="btn elem-height check-tag-btn hide-on-mobile check-tag-btn-click">Post a product</button>
+            }
+            else
+            {
+                <a class="nav-item-margin cursor-pointer hide-on-mobile" data-bs-toggle="modal" data-bs-target="#modal-login">Login</a>
+                <button type="button" class="btn elem-height check-tag-btn hide-on-mobile" data-bs-toggle="modal" data-bs-target="#modal-login">Post a product</button>
+            }
+
+            @if (isMain)
+            {
+                if (isSignedIn)
+                {
+                    <div class="nav-block-content">
+                        <img src="~/images/main.svg" />
+                    </div>
+                }
+                else
+                {
+                    <div class="nav-block-content">
+                        <div class="text-main-block">
+                            <div>The best new</div>
+                            <div>Telegram products,</div>
+                            <div>every day</div>
+                            <a href="@urlHelper.ProfileIndex()" class="nav-link btn-join-now" data-bs-toggle="modal" data-bs-target="#modal-login">Join Now</a>
+                        </div>
+                        <img class="main-image" src="~/images/main.svg" />
+                    </div>
+                }
+            }
+
+        </nav>
+    </header>
+    @if (currentStatus != 404)
+    {
+        <div>
+            @RenderBody()
+        </div>
+    }
+    else
+    {
+        <div>
+            <h3 class="message-404">
+                PAGE NOT FOUND
+            </h3>
+        </div>
+    }
+    <div class="modal fade" id="modal-login" tabindex="-1" role="dialog" aria-labelledby="signup" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div id="modalBody">
+                    <div class="dialog-tg">
+                        @await Component.InvokeAsync("TelegramButton", null)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @await Html.PartialAsync("_MobileMenu")
+    <script src="~/dist/scripts.bundle.js" asp-append-version="true"></script>
+
+    @await Html.PartialAsync("_CheckTagModal")
+</body>
+</html>

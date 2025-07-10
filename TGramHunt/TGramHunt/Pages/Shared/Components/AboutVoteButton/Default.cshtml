@@ -1,0 +1,37 @@
+﻿@using TGramHunt.Services.Services.IServices;
+@inject IUserService UserService
+@{
+    string txt;
+    if (@Model.IsVoteDisabled)
+    {
+        txt = "onclick='return false'";
+    }
+    else if ((await UserService.GetIfAuthorized(User)) != null)
+    {
+        txt = "onclick=toVote(this,'button-voting-voted')";
+    }
+    else
+    {
+        txt = "data-bs-toggle=modal data-bs-target=#modal-login";
+    }
+
+    var addClass = Model.IsUserVoted ? "button-voting-voted" : string.Empty;
+    var voteText = Model.IsUserVoted ? "Upvoted" : "Upvote";
+
+    if (!Model.IsVoteDisabled)
+    {
+        addClass += " button-voting-hover";
+    }
+}
+<div>
+    <button type="button" 
+            value="@Model.ProductId"
+            success-class="button-voting-voted"
+            class="button-voting button-element @Html.Raw(addClass)" @Html.Raw(txt)>
+        @if (!Model.IsVoteDisabled)
+        {
+            <i class="fas fa-chevron-up fa-xs"></i>
+        }
+        <div class="vote-count-holder"><span class="vote-text">@voteText</span> (<span class="vote-count">@Model.VoteCount</span>)</div>
+    </button>
+</div>

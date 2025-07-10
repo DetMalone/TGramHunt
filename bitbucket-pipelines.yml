@@ -1,0 +1,91 @@
+# This is an example Starter pipeline configuration
+# Use a skeleton to build, test and deploy using manual and parallel steps
+# -----
+# You can specify a custom docker image from Docker Hub as your build environment.
+#https://hub.docker.com/_/microsoft-dotnet-sdk
+image: mcr.microsoft.com/dotnet/sdk:6.0
+
+pipelines:
+  branches:
+    release/*:
+      - parallel:
+          fail-fast: false
+          steps:
+            - step:
+                name: Build and Test Dev (Main)
+                caches:
+                  - dotnetcore
+                script:
+                  - export PROJECT_NAME=TGramHunt
+                  - cd TGramHunt/$PROJECT_NAME
+                  - apt-get update
+                  - apt-get upgrade -y
+                  - curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
+                  - apt-get install -y nodejs
+                  - npm i
+                  - npm run build-prod
+                  - export CONFIGURATION=Release
+                  - REPORTS_PATH=./test-reports/build_${BITBUCKET_BUILD_NUMBER}
+                  - dotnet restore
+                  - dotnet build --no-restore --configuration ${CONFIGURATION}
+                  - dotnet test --no-build --configuration ${CONFIGURATION} --test-adapter-path:. --logger:"junit;LogFilePath=$REPORTS_PATH/junit.xml"
+                  - mkdir --parents ../../publish/Main
+                  - dotnet publish $PROJECT_NAME.csproj --configuration ${CONFIGURATION} --no-build --output ../../publish/Main
+                  - cd ../../publish/Main
+                  - apt-get install zip -y
+                  - zip -r $SOLUTION_NAME.zip *
+                artifacts:
+                  - publish/Main/TGramHunt.zip
+            - step:
+                name: Build and Test Dev (AdminPanel)
+                caches:
+                  - dotnetcore
+                script:
+                  - export PROJECT_NAME=TGramHunt.AdminPanel
+                  - cd TGramHunt/$PROJECT_NAME
+                  - apt-get update
+                  - apt-get upgrade -y
+                  - curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
+                  - apt-get install -y nodejs
+                  - npm i
+                  - npm run build-prod
+                  - export CONFIGURATION=Release
+                  - REPORTS_PATH=./test-reports/build_${BITBUCKET_BUILD_NUMBER}
+                  - dotnet restore
+                  - dotnet build --no-restore --configuration ${CONFIGURATION}
+                  - dotnet test --no-build --configuration ${CONFIGURATION} --test-adapter-path:. --logger:"junit;LogFilePath=$REPORTS_PATH/junit.xml"
+                  - mkdir --parents ../../publish/Admin
+                  - dotnet publish $PROJECT_NAME.csproj --configuration ${CONFIGURATION} --no-build --output ../../publish/Admin
+                  - cd ../../publish/Admin
+                  - apt-get install zip -y
+                  - zip -r $PROJECT_NAME.zip *
+                artifacts:
+                  - publish/Admin/TGramHunt.AdminPanel.zip  
+            
+      - parallel:
+          fail-fast: false
+          steps:
+            - step:
+                name: Deploy to Dev (Main)
+                script:
+                  - cd publish/Main
+                  - pipe: microsoft/azure-web-apps-deploy:1.0.4
+                    variables:
+                      AZURE_APP_ID: $AZURE_APP_ID
+                      AZURE_PASSWORD: $AZURE_PASSWORD
+                      AZURE_TENANT_ID: $AZURE_TENANT_ID
+                      AZURE_RESOURCE_GROUP: $AZURE_RESOURCE_GROUP
+                      AZURE_APP_NAME: $AZURE_APP_NAME
+                      ZIP_FILE: $SOLUTION_NAME.zip   
+            - step:
+                name: Deploy to Dev (AdminPanel)
+                script:
+                  - cd publish/Admin
+                  - pipe: microsoft/azure-web-apps-deploy:1.0.4
+                    variables:
+                      AZURE_APP_ID: $ADMIN_AZURE_APP_ID
+                      AZURE_PASSWORD: $ADMIN_AZURE_PASSWORD
+                      AZURE_TENANT_ID: $AZURE_TENANT_ID
+                      AZURE_RESOURCE_GROUP: $AZURE_RESOURCE_GROUP
+                      AZURE_APP_NAME: $ADMIN_AZURE_APP_NAME
+                      ZIP_FILE: TGramHunt.AdminPanel.zip

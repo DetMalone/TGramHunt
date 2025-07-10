@@ -1,0 +1,167 @@
+﻿.border-radius {
+    border-radius: 12px;
+}
+
+#create-prod-form {
+    background-color: #fff;
+    padding: 20px 50px 20px 50px;
+    border: 1px solid #17222D1A;
+}
+
+    #create-prod-form p {
+        opacity: .5;
+        font-weight: 500;
+    }
+
+.form-field {
+    background-color: var(--field-color);
+    font-weight: 500;
+}
+
+    .form-field:focus {
+        border-color: #039BE5 !important;
+        box-shadow: 0 0 0 3px #039be5;
+    }
+
+#create-prod-form .form-select {
+    cursor: pointer;
+}
+
+    #create-prod-form .form-select:focus {
+        color: #212529;
+        background-color: #fff;
+    }
+
+#cover {
+    width: 0px;
+    height: 0px;
+}
+
+#create-prod-preview {
+    max-width: 130px;
+}
+
+.cover-preview {
+    width: 100%;
+    max-width: 110px;
+    max-height: 110px;
+    border: 2px solid;
+    border-radius: 24px;
+    border-color: #F1F1F4;
+}
+
+.btn-file-upload {
+    padding-top: 7px;
+    background-color: white;
+    font-weight: 500;
+    border-radius: 24px;
+    border: 2px solid #E7E8EA;
+    max-width: 100%;
+}
+
+.btn-publish {
+    color: white;
+    background-color: var(--primary-btn-color);
+    margin-right: 10px;
+    max-width: 130px;
+}
+
+.btn-cancel {
+    color: black;
+    background-color: var(--secondary-btn-color);
+    max-width: 130px;
+    margin-left: auto;
+}
+
+.makers-control-left {
+    border-radius: 12px 0px 0px 12px;
+}
+
+.makers-control-right {
+    border-radius: 0px 12px 12px 0px;
+    background-color: var(--field-color);
+}
+
+.maker {
+    cursor: grab;
+}
+
+.maker-photo {
+    max-width: 74px;
+}
+
+.maker-text {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    height: 42px;
+}
+
+    .maker-text > span {
+        line-height: 42px;
+    }
+
+.delete-btn {
+    display: -webkit-flexbox;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.del-hover {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -30px;
+    right: 0;
+    align-items: center;
+    justify-content: center;
+    color: red;
+    font-weight: 500;
+    visibility: hidden;
+    display: none;
+}
+
+label.error {
+    margin-top: 7px;
+    color: #dc3545 !important;
+    font-weight: 500;
+}
+
+@media (min-width: 576px) {
+    .delete-btn {
+        display: none;
+    }
+
+    .maker:hover .del-hover {
+        visibility: visible;
+        display: flex;
+    }
+
+    .maker:hover .maker-photo, .maker:hover .maker-text {
+        opacity: .3;
+    }
+}
+
+@media (max-width: 500px) {
+    #create-prod-form {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 629px) {
+    .btn-toolbar label:nth-of-type(3) {
+        padding-top: 2px;
+    }
+}
+
+@media (max-width: 992px) {
+    #create-prod-container {
+        padding: 0px !important;
+    }
+}

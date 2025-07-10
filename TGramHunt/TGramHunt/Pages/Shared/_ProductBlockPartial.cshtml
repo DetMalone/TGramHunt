@@ -1,0 +1,45 @@
+﻿@using Microsoft.AspNetCore.Mvc.Routing
+@using TGramHunt.Contract.Enums
+@using TGramHunt.Services.Helpers
+@model TGramHunt.Contract.ViewModels.MainPage.ProductBase
+@{
+    var link = LinkHelper.CreateLink(Model.Tag);
+    var imageLink = LinkHelper.ImageRelativLink(Model.ImageIdx56, Model.ImageCache);
+}
+
+<div class="row">
+
+    <div class="col ps-0 col-md-auto icon-product">
+        @if (!string.IsNullOrWhiteSpace(imageLink))
+        {
+            <img src="@imageLink" />
+        }
+    </div>
+
+    <div class="col">
+
+        <div class="col">
+            <span class="fw-bold text-break product-name">@Model.Name</span>
+            <a target="_blank"
+               rel="noopener noreferrer"
+               href="@link"
+               class="link-secondary text-underline-hover text-break">@Model.Tag</a>
+        </div>
+
+        <div class="col">
+            <span class="category-color">@Html.DisplayTextFor(m => m.Category)</span>@if (@Model.CurrentStatus == ProductStatus.OnModeration)
+            {
+                <span class="text-break product-status status-awaiting">Awaiting moderation</span>
+            }
+            else if (@Model.CurrentStatus == ProductStatus.Rejected)
+            {
+                <span class="text-break product-status status-rejected">Rejected</span>
+            }
+        </div>
+    </div>
+</div>
+
+
+<div class="row" style="margin-top: 1rem;">
+    <div class="col ps-0 text-break">@Model.Description</div>
+</div>

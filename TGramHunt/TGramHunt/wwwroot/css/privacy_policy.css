@@ -1,0 +1,143 @@
+﻿.privacy-container {
+    padding: 0px 230px 0px 230px;
+    word-break: break-word;
+}
+
+    .privacy-container .margin-for-first-header-elements {
+        margin-bottom: 20px;
+    }
+
+    .privacy-container p, .privacy-container ul {
+        font-family: 'SF Pro Text';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 24px;
+        /* or 171% */
+
+        letter-spacing: -0.2625px;
+        color: #000000;
+    }
+
+    .privacy-container .date-last-update {
+        font-family: 'SF Pro Text';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 17px;
+        /* identical to box height */
+
+        letter-spacing: -0.2625px;
+        color: #000000;
+        mix-blend-mode: normal;
+        opacity: 0.4;
+    }
+
+    .privacy-container h1 {
+        font-family: 'SF Pro Text';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 36px;
+        line-height: 43px;
+        /* identical to box height */
+
+        letter-spacing: -0.675px;
+        color: #000000;
+        margin: 40px 0px 40px 0px;
+    }
+
+    .privacy-container h2 {
+        font-family: 'SF Pro Text';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 28px;
+        line-height: 33px;
+        letter-spacing: -0.525px;
+        color: #000000;
+        margin: 40px 0px 40px 0px;
+    }
+
+    .privacy-container h3 {
+        font-family: 'SF Pro Text';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 22px;
+        line-height: 26px;
+        letter-spacing: -0.4125px;
+        color: #000000;
+        margin: 30px 0px 20px 0px;
+    }
+
+@media (max-width: 991px) {
+    .privacy-container {
+        padding: 0px 50px 0px 50px;
+    }
+}
+
+@media (max-width: 767px) {
+    .privacy-container {
+        padding: 0px 20px 0px 20px;
+    }
+
+        .privacy-container .margin-for-first-header-elements {
+            margin-bottom: 15px;
+        }
+
+        .privacy-container p, .privacy-container ul {
+            font-family: 'SF Pro Text';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 12px;
+            line-height: 18px;
+            letter-spacing: -0.225px;
+            color: #000000;
+        }
+
+        .privacy-container .date-last-update {
+            font-family: 'SF Pro Text';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 12px;
+            line-height: 14px;
+            letter-spacing: -0.225px;
+            color: #000000;
+            mix-blend-mode: normal;
+            opacity: 0.4;
+        }
+
+        .privacy-container h1 {
+            font-family: 'SF Pro Text';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 24px;
+            line-height: 29px;
+            letter-spacing: -0.45px;
+            color: #000000;
+            margin: 25px 0px 25px 0px;
+        }
+
+        .privacy-container h2 {
+            font-family: 'SF Pro Text';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 18px;
+            line-height: 21px;
+            letter-spacing: -0.3375px;
+            color: #000000;
+            margin: 25px 0px 25px 0px;
+        }
+
+
+        .privacy-container h3 {
+            font-family: 'SF Pro Text';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 19px;
+            /* identical to box height */
+
+            letter-spacing: -0.3px;
+            color: #000000;
+            margin: 25px 0px 15px 0px;
+        }
+}

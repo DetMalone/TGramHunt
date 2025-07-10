@@ -1,0 +1,577 @@
+﻿body.modal-open {
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+}
+
+.modal-dialog-about {
+    max-width: 980px;
+    width: 980px;
+
+    .close-dialog-about {
+        position: absolute;
+        right: 25px;
+        top: 25px;
+        cursor: pointer;
+        width: 12px;
+        height: 12px;
+    }
+
+    > .modal-content {
+        max-width: 980px;
+        width: 980px;
+
+        > .modal-body {
+            padding: 0px;
+        }
+    }
+}
+
+.about-container {
+    padding: 0px 50px 50px 50px;
+
+    .product-name {
+        font-family: 'SF Pro Text';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 21px;
+        line-height: 25px;
+        letter-spacing: -0.39375px;
+        color: #000000;
+    }
+
+    .link-secondary {
+        font-family: 'SF Pro Text';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 21px;
+        line-height: 25px;
+        letter-spacing: -0.39375px;
+        color: #000000;
+        mix-blend-mode: normal;
+        opacity: 0.4;
+    }
+
+    .category-color {
+        font-family: 'SF Pro Text';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: -0.347826px;
+        color: #039BE5;
+        margin: 5px 0px 8px 0px;
+    }
+
+    .product-description {
+        font-family: 'SF Pro Text';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: -0.347826px;
+        color: #000000;
+    }
+
+    .second-section-about-product {
+        border-top: 1px solid #dee2e6;
+        margin-top: 30px;
+        padding-top: 30px;
+    }
+
+    .right-container {
+        width: 270px;
+        max-width: 270px;
+        margin-left: auto;
+        padding: 0px;
+    }
+
+    .open-at-telegram {
+        font-family: 'SF Pro Text';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 17px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        letter-spacing: -0.2625px;
+        color: #121212;
+        background: rgba(3, 155, 229, 0.0001);
+        background-color: #e7e7e7;
+        border: 1px solid #E7E8EA;
+        border-radius: 26px;
+        margin-top: 10px;
+        padding-left: 79px;
+
+        &:hover {
+            background-color: var(--bs-btn-hover-bg);
+            border-color: var(--bs-btn-hover-border-color);
+        }
+    }
+
+    .button-voting {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #039BE5;
+        border: 1px solid rgba(153, 153, 153, 0.3);
+        border-radius: 26px;
+        text-align: unset;
+        color: #FFFFFF;
+
+        i {
+            margin: 0px 10px 0px 0px;
+        }
+
+        .vote-count-holder {
+            font-family: 'SF Pro Text';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 19px;
+            color: #FFFFFF;
+            letter-spacing: -0.3px;
+            padding: 0px;
+            display: inline-block;
+        }
+    }
+
+    .button-voting-voted {
+        text-align: unset;
+        color: var(--bs-btn-hover-color);
+        background-color: var(--bs-btn-hover-bg);
+        border-color: var(--bs-btn-hover-border-color);
+
+        .vote-count-holder {
+            color: #121212;
+        }
+    }
+
+    .button-voting-hover {
+        &:hover:not(.button-voting-voted) {
+            text-align: unset;
+            color: #FFFFFF;
+            border-color: var(--bs-btn-hover-border-color);
+            background: linear-gradient(227deg,rgb(32,47,62),#039BE5);
+
+            .vote-count-holder {
+                color: inherit;
+
+                .vote-count {
+                    font-family: 'SF Pro Text';
+                    font-style: normal;
+                    font-weight: 500;
+                    font-size: 16px;
+                    line-height: 19px;
+                    color: inherit;
+                    letter-spacing: -0.3px;
+                    padding: 0px;
+                    display: inline-block;
+                }
+            }
+        }
+
+        &:hover.button-voting-voted {
+            border-color: #039BE5;
+        }
+    }
+
+    .button-element {
+        width: 270px;
+        height: 52px;
+    }
+
+    .creators-headers {
+        font-family: 'SF Pro Text';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 11px;
+        line-height: 13px;
+        text-transform: uppercase;
+        color: #000000;
+        mix-blend-mode: normal;
+        opacity: 0.4;
+    }
+
+    .hunter-header {
+        margin-top: 30px;
+        padding-top: 30px;
+        border-top: 1px solid rgba(23, 34, 45, 0.1);
+        margin-bottom: 13px;
+    }
+
+    .makers-header {
+        margin: 25px 0px 10px 0px;
+    }
+
+    .hunter-container {
+        margin: 0px;
+
+        .hunter-avatar {
+            max-width: 41px;
+            max-height: 41px;
+            padding: 0px;
+
+            img {
+                max-width: 40px;
+                max-height: 40px;
+                border-radius: 50%;
+                border: 1px solid white;
+                height: auto;
+                width: auto;
+                text-align: center;
+            }
+        }
+
+        .hunter-info {
+            padding: 0px 0px 0px 8px;
+            overflow: auto;
+        }
+
+        .hunter-name {
+            font-family: 'SF Pro Text';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 17px;
+            letter-spacing: -0.2625px;
+            color: #000000;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .hunter-email {
+            font-family: 'SF Pro Text';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 17px;
+            letter-spacing: -0.2625px;
+            color: #000000;
+            mix-blend-mode: normal;
+            opacity: 0.4;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+
+    .the-maker {
+        font-family: 'SF Pro Text';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 17px;
+        letter-spacing: -0.2625px;
+        color: #000000;
+        margin-bottom: 4px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    > .row {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+
+    .icon-product {
+        padding: 0px;
+        max-width: 104px;
+        max-height: 104px;
+        height: auto;
+        width: auto;
+        text-align: center;
+
+        img {
+            padding: 0px;
+            max-width: 104px;
+            max-height: 104px;
+            height: auto;
+            width: auto;
+            text-align: center;
+            border-radius: 8px;
+        }
+    }
+
+    .product-text-about {
+        padding-left: 17px;
+    }
+
+    .product-user-profile {
+        flex-flow: row wrap;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        margin-top: 15px;
+    }
+}
+
+.category-color {
+    color: #039BE5;
+    cursor: pointer;
+    font-size: 16px;
+
+    &:hover {
+        opacity: 0.5;
+    }
+}
+
+.icon-product {
+    max-width: 70px;
+    margin: 3px 0px;
+
+    img {
+        border-radius: 8px;
+    }
+}
+
+.text-underline-hover {
+    text-decoration: none;
+}
+
+@media (max-width: 991px) {
+    .modal-dialog-about {
+        max-width: 668px;
+        width: 668px;
+
+        > .modal-content {
+            max-width: 668px;
+            width: 668px;
+        }
+
+        .close-dialog-about {
+            right: 20px;
+            top: 20px;
+        }
+    }
+
+    .about-container {
+        .open-at-telegram {
+            padding-left: 56px;
+        }
+
+        .right-container {
+            width: 100%;
+            max-width: 240px;
+        }
+
+        .button-element {
+            width: 220px;
+            height: 48px;
+        }
+
+        .hunter-header {
+            margin-top: 25px;
+            padding-top: 25px;
+            margin-bottom: 10px;
+        }
+
+        .hunter-container {
+            .hunter-avatar {
+                max-width: 33px;
+                max-height: 33px;
+
+                img {
+                    max-width: 32px;
+                    max-height: 32px;
+                }
+            }
+
+            .hunter-name {
+                font-size: 12px;
+                line-height: 14px;
+                letter-spacing: -0.225px;
+            }
+
+            .hunter-email {
+                font-size: 12px;
+                line-height: 14px;
+                letter-spacing: -0.225px;
+            }
+        }
+
+        .the-maker {
+            font-size: 12px;
+            line-height: 14px;
+            letter-spacing: -0.225px;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    .modal-dialog-about {
+        max-width: 280px;
+        width: 100%;
+        margin: 1.75rem auto;
+
+        > .modal-content {
+            max-width: 280px;
+            width: 100%;
+        }
+
+        .close-dialog-about {
+            right: 16px;
+            top: 16px;
+        }
+    }
+
+    #about-container .modal-header {
+        height: 40px;
+    }
+
+    .about-container {
+        padding: 0px 20px 20px 20px;
+
+        > .row {
+            > .col {
+                padding: 0px;
+            }
+        }
+
+        .product-user-profile {
+            justify-content: center;
+        }
+
+        > div {
+            &:first-child {
+                flex-direction: column;
+            }
+        }
+
+        .second-section-about-product {
+            border-top: none;
+            margin-top: 0px;
+            padding-top: 0px;
+        }
+
+        .icon-product {
+            max-width: 80px;
+            max-height: 80px;
+            margin: 0px auto;
+
+            img {
+                max-width: 80px;
+                max-height: 80px;
+                margin: 0px auto;
+            }
+        }
+
+        .product-name {
+            font-size: 14px;
+            line-height: 17px;
+            letter-spacing: -0.2625px;
+        }
+
+        .link-secondary {
+            font-size: 14px;
+            line-height: 17px;
+            letter-spacing: -0.2625px;
+        }
+
+        .category-color {
+            font-size: 14px;
+            line-height: 17px;
+            text-align: center;
+            letter-spacing: -0.304348px;
+            margin: 2px 0px 12px 0px;
+        }
+
+        .product-description {
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 14px;
+            text-align: center;
+            letter-spacing: -0.26087px;
+            margin: 0px 0px 20px 0px;
+        }
+
+        .button-element {
+            max-width: 240px;
+            width: 100%;
+            height: 42px;
+            padding-top: 0px;
+            padding-bottom: 0px;
+        }
+
+        .product-text-about {
+            padding-left: 0px;
+        }
+
+        .right-container {
+            margin-left: 0px;
+            padding: 0px;
+        }
+
+        .button-voting {
+            .vote-count-holder {
+                font-size: 14px;
+                line-height: 17px;
+                letter-spacing: -0.2625px;
+            }
+        }
+
+        .button-voting-hover {
+            &:hover {
+                .vote-count-holder {
+                    font-size: 14px;
+                    line-height: 17px;
+                    letter-spacing: -0.2625px;
+
+                    .vote-count {
+                        font-size: 14px;
+                        line-height: 17px;
+                        letter-spacing: -0.2625px;
+                    }
+                }
+            }
+        }
+
+        .open-at-telegram {
+            font-size: 12px;
+            line-height: 14px;
+            letter-spacing: -0.225px;
+            padding-left: 0px;
+            padding-right: 0px;
+            justify-content: center;
+        }
+
+        .hunter-header {
+            margin-top: 20px;
+            padding-top: 20px;
+            margin-bottom: 13px;
+        }
+
+        .creators-headers {
+            font-size: 10px;
+            line-height: 12px;
+        }
+
+        .hunter-container {
+            .hunter-avatar {
+                max-width: 37px;
+                max-height: 37px;
+
+                img {
+                    max-width: 36px;
+                    max-height: 36px;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .about-container {
+        .button-voting {
+            padding: 0px 6px 0px 6px;
+        }
+
+        .button-voting-hover {
+            &:hover {
+                padding: 0px 6px 0px 6px;
+            }
+        }
+    }
+}

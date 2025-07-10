@@ -1,0 +1,28 @@
+﻿@using TGramHunt.Contract.ViewModels.MainPage
+@model IEnumerable<ProductsForPeriodViewModel>
+
+<div class="modal" id="about-container">
+    <div class="modal-dialog modal-dialog-about modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="about-body"></div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="product-not-found-container">
+    <div class="modal-dialog modal-dialog-about modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="product-not-found-body">
+                <div class="about-container">The product you are looking for has been removed or is temporarily unavailable</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<partial name="_ProductListPartial" model="@Model" />

@@ -1,0 +1,60 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Content Remove="wwwroot\js\site.ts" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\TGramHunt.Contract\TGramHunt.Contract.csproj" />
+		<ProjectReference Include="..\TGramHunt.Services\TGramHunt.Services.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="wwwroot\dist\47074dec01b64a5db2c4.woff2" />
+		<None Include="wwwroot\dist\64d495f582d4a1590a6c.woff2" />
+		<None Include="wwwroot\dist\scripts.bundle.js" />
+		<None Include="wwwroot\dist\scripts.bundle.js.map" />
+		<None Include="wwwroot\dist\style.css.map" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<TypeScriptCompile Include="wwwroot\js\site.ts" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Update="appsettings.json">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Update="wwwroot\css\all_styles.scss">
+			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+		</Content>
+		<Content Update="wwwroot\css\layout.scss">
+			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+		</Content>
+		<Content Update="wwwroot\css\main.scss">
+			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+		</Content>
+		<Content Update="wwwroot\css\site.css">
+			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+		</Content>
+		<Content Update="wwwroot\css\tgiframe.scss">
+			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+		</Content>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Views\Profile\" />
+	</ItemGroup>
+
+</Project>
